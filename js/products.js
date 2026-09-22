@@ -4,7 +4,6 @@
 const CATEGORIES = [
   { id: 'all', name: 'Todos', icon: '✨' },
   { id: 'fruta-forrada', name: 'Fruta Forrada', icon: '🍏' },
-  { id: 'vasos-koala', name: 'Vasos Koala', icon: '🐨' },
   { id: 'gomitas', name: 'Gomitas', icon: '🍬' },
   { id: 'manzanas-prep', name: 'Manzanas Preparadas', icon: '✨' },
   { id: 'botanas', name: 'Botanas & Papas', icon: '🥔' },
@@ -40,8 +39,8 @@ const PRODUCTS = [
   {
     id: 'vaso-koala-ch',
     name: 'Vaso Koala Chico',
-    category: 'vasos-koala',
-    categoryName: 'Vasos Koala',
+    category: 'fruta-forrada',
+    categoryName: 'Fruta Forrada',
     price: 30,
     description: 'Uvas frescas forradas con Pulparindo (porción chica) preparadas con gomitas, chilito y chamoy.',
     image: 'assets/products/vaso_koala_ch.jpg',
@@ -50,8 +49,8 @@ const PRODUCTS = [
   {
     id: 'vaso-koala-g',
     name: 'Vaso Koala Grande',
-    category: 'vasos-koala',
-    categoryName: 'Vasos Koala',
+    category: 'fruta-forrada',
+    categoryName: 'Fruta Forrada',
     price: 40,
     description: 'Porción grande de uvas frescas forradas con Pulparindo, preparadas con gomitas, chilito y chamoy.',
     image: 'assets/products/vaso_koala_g.jpg',
