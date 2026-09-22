@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Frutastik - El paraíso del antojo | Catálogo Digital</title>
+  
+  <!-- Favicon e Iconos -->
+  <link rel="icon" type="image/png" href="assets/brand/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/brand/favicon.png" />
+
+  <!-- Meta tags para compartir en WhatsApp, Facebook y Twitter -->
+  <meta property="og:title" content="Frutastik - El paraíso del antojo" />
+  <meta property="og:description" content="Catálogo digital de manzanas forradas, gomitas preparadas, botanas y bebidas. ¡Haz tu pedido directo por WhatsApp!" />
+  <meta property="og:image" content="assets/brand/logo.png" />
+  <meta name="theme-color" content="#d90429" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Barra de Navegación Superior -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-wrapper">
+        <img src="assets/brand/logo.png" alt="Frutastik Logo" class="brand-logo-img" />
+        <div class="brand-text">
+          <span class="brand-title">Frutastik</span>
+          <span class="brand-slogan">El paraíso del antojo</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <!-- Enlace rápido de contacto directo a WhatsApp -->
+        <a href="https://wa.me/525611209477?text=¡Hola!%20Tengo%20una%20duda%20sobre%20sus%20productos." target="_blank" rel="noopener" class="direct-wa-btn" title="Chatear por WhatsApp">
+          <span>💬 WhatsApp</span>
+        </a>
+
+        <!-- Botón del Carrito en Navbar -->
+        <button id="cart-toggle-btn" class="nav-cart-btn" aria-label="Ver carrito">
+          <span class="cart-icon">🛒</span>
+          <span id="cart-badge" class="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sección Hero / Bienvenida -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-status-pill">
+        <span class="status-dot"></span>
+        <span>Tomando pedidos hoy</span>
+      </div>
+      <h1 class="hero-title">¡El Paraíso del Antojo!</h1>
+      <p class="hero-subtitle">
+        Manzanas forradas de Pulparindo, vasos preparados, botanas crujientes y combos irresistibles. ¡Arma tu orden y pídela en segundos!
+      </p>
+
+      <div class="hero-features">
+        <span class="feature-tag">🌶️ Chamoy y Chilito de la Casa</span>
+        <span class="feature-tag">🍏 Fruta Fresca Seleccionada</span>
+        <span class="feature-tag">⚡ Pedido directo a WhatsApp</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Buscador y Filtro por Categorías -->
+  <section class="controls-section">
+    <!-- Buscador -->
+    <div class="search-box-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" class="search-input" placeholder="Buscar antojos (ej. chamoy, manzana, uvas, papas)..." />
+      <button id="clear-search" class="clear-search-btn" title="Limpiar búsqueda">✕</button>
+    </div>
+
+    <!-- Pestañas de Categorías -->
+    <nav class="categories-nav" id="categories-list">
+      <!-- Se llenan dinámicamente desde products.js -->
+    </nav>
+  </section>
+
+  <!-- Cuadrícula del Catálogo -->
+  <main class="catalog-section">
+    <div id="products-grid" class="products-grid">
+      <!-- Los productos se renderizan dinámicamente con app.js -->
+    </div>
+
+    <!-- Estado si no hay resultados en búsqueda -->
+    <div id="empty-state" class="empty-state hidden">
+      <div class="empty-state-icon">🤤</div>
+      <h3>No encontramos ese antojo</h3>
+      <p>Intenta con otra palabra como "manzana", "gomitas", "papas" o "coca".</p>
+    </div>
+  </main>
+
+  <!-- Barra Flotante de Carrito para Móviles (Bottom Bar) -->
+  <aside id="floating-cart-bar" class="floating-cart-bar" onclick="document.getElementById('cart-toggle-btn').click()">
+    <div class="floating-cart-info">
+      <span class="floating-cart-count" id="cart-badge-floating">0</span>
+      <span class="floating-cart-text">Ver Carrito</span>
+    </div>
+    <div class="floating-cart-action">
+      <span id="floating-cart-total">$0 MXN</span>
+      <span>➔</span>
+    </div>
+  </aside>
+
+  <!-- Backdrop del Carrito -->
+  <div id="cart-backdrop" class="cart-backdrop"></div>
+
+  <!-- Drawer / Panel Lateral del Carrito -->
+  <aside id="cart-drawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-heading">
+    <div class="cart-header">
+      <h2 id="cart-heading" class="cart-header-title">
+        <span>🛒</span> Tu Carrito de Antojos
+      </h2>
+      <button id="close-cart-btn" class="close-cart-btn" aria-label="Cerrar carrito">✕</button>
+    </div>
+
+    <div class="cart-body">
+      <!-- Mensaje cuando el carrito está vacío -->
+      <div id="cart-empty-msg" class="cart-empty-msg">
+        <div class="cart-empty-icon">🐨</div>
+        <h3>Tu carrito está esperando antojos</h3>
+        <p>Explora nuestro catálogo y agrega tus productos favoritos.</p>
+      </div>
+
+      <!-- Lista de items seleccionados -->
+      <div id="cart-items-container" class="cart-items-list">
+        <!-- Renderizado dinámico -->
+      </div>
+
+      <!-- Formulario para el Pedido -->
+      <form id="checkout-form" class="checkout-form" onsubmit="event.preventDefault();">
+        <h3 class="form-heading">📝 Datos para tu entrega</h3>
+        
+        <div class="form-group">
+          <label for="customer-name">Tu Nombre / ¿Quién recibe? *</label>
+          <input type="text" id="customer-name" class="form-input" placeholder="Ej. Juan Pérez" required />
+        </div>
+
+        <div class="form-group">
+          <label for="delivery-type">¿Cómo recibirás tu pedido?</label>
+          <select id="delivery-type" class="form-select">
+            <option value="domicilio">🛵 Entrega a Domicilio</option>
+            <option value="recoger">🏬 Pasar a Recoger</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="address-group">
+          <label for="customer-address">Dirección o Referencias de Entrega *</label>
+          <input type="text" id="customer-address" class="form-input" placeholder="Calle, número, colonia o referencias" />
+        </div>
+
+        <div class="form-group">
+          <label for="order-notes">Instrucciones o notas adicionales (Opcional):</label>
+          <textarea id="order-notes" class="form-textarea" placeholder="Ej. Con bastante chamoy, sin chile que pique, etc."></textarea>
+        </div>
+      </form>
+    </div>
+
+    <!-- Pie del Carrito con Totales y Botón de WhatsApp -->
+    <div id="cart-footer" class="cart-footer hidden">
+      <div class="cart-totals-row">
+        <span>Subtotal:</span>
+        <span id="cart-subtotal">$0 MXN</span>
+      </div>
+      <div class="cart-totals-row total-final">
+        <span>Total a Pagar:</span>
+        <span id="cart-total">$0 MXN</span>
+      </div>
+
+      <button id="send-whatsapp-order" class="whatsapp-checkout-btn">
+        <span>📲 Enviar Pedido por WhatsApp</span>
+      </button>
+
+      <button id="clear-cart-btn" class="clear-cart-text-btn">Vaciar carrito</button>
+    </div>
+  </aside>
+
+  <!-- Modal para ver fotos ampliadas -->
+  <div id="photo-modal" class="photo-modal">
+    <div class="modal-content">
+      <img id="photo-modal-img" src="" alt="Producto ampliado" class="photo-modal-img" />
+      <div class="photo-modal-footer">
+        <h4 id="photo-modal-title" class="photo-modal-title"></h4>
+        <button id="photo-modal-close" class="photo-modal-close">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de Página -->
+  <footer class="site-footer">
+    <p><strong>Frutastik</strong> — El paraíso del antojo 🐨</p>
+    <p>Pedidos directos vía WhatsApp: <a href="https://wa.me/525611209477" target="_blank" rel="noopener">56 1120 9477</a></p>
+    <p style="margin-top: 8px; font-size: 0.75rem; color: #aaa;">Hecho con ❤️ para los amantes del chamoy</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Archivos temporales y del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+
+# Entornos virtuales o caches locales
+__pycache__/
+*.pyc
