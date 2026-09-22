@@ -11,17 +11,17 @@
   <meta http-equiv="Expires" content="0" />
 
   <!-- Favicon e Iconos -->
-  <link rel="icon" type="image/png" href="assets/brand/favicon.png?v=3" />
-  <link rel="apple-touch-icon" href="assets/brand/favicon.png?v=3" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon.png?v=4" />
+  <link rel="apple-touch-icon" href="assets/brand/favicon.png?v=4" />
 
   <!-- Meta tags para compartir en WhatsApp, Facebook y Twitter -->
   <meta property="og:title" content="Frutastik - El paraíso del antojo" />
   <meta property="og:description" content="Catálogo digital de manzanas forradas, gomitas preparadas, botanas y bebidas. ¡Haz tu pedido directo por WhatsApp!" />
-  <meta property="og:image" content="assets/brand/logo.png?v=3" />
+  <meta property="og:image" content="assets/brand/logo.png?v=4" />
   <meta name="theme-color" content="#d90429" />
 
   <!-- Estilos -->
-  <link rel="stylesheet" href="css/styles.css?v=3" />
+  <link rel="stylesheet" href="css/styles.css?v=4" />
 </head>
 <body>
 
@@ -189,6 +189,38 @@
     </div>
   </div>
 
+  <!-- Modal para Personalizar Gomitas de Gomi Vasos -->
+  <div id="gomitas-modal" class="gomitas-modal">
+    <div class="gomitas-modal-backdrop"></div>
+    <div class="gomitas-modal-content">
+      <div class="gomitas-modal-header">
+        <div>
+          <h3 id="gomitas-modal-title" class="gomitas-modal-title">Elige tus 3 gomitas</h3>
+          <p id="gomitas-modal-subtitle" class="gomitas-modal-subtitle"></p>
+        </div>
+        <button id="gomitas-modal-close" class="photo-modal-close" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="gomitas-modal-body">
+        <p class="gomitas-instruction">Selecciona hasta 3 opciones de la barra de gomitas:</p>
+        <div id="gomitas-options-list" class="gomitas-options-list">
+          <!-- Renderizado dinámico -->
+        </div>
+
+        <div class="gomitas-counter-bar">
+          <span id="gomitas-selected-counter" class="gomitas-counter-text">0 de 3 seleccionadas</span>
+          <button type="button" id="gomitas-quick-select-btn" class="gomitas-quick-btn">✨ Surtido variado</button>
+        </div>
+      </div>
+
+      <div class="gomitas-modal-footer">
+        <button id="gomitas-confirm-add-btn" class="gomitas-confirm-btn" disabled>
+          Selecciona al menos 1 gomita
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Pie de Página -->
   <footer class="site-footer">
     <p><strong>Frutastik</strong> — El paraíso del antojo 🐨</p>
@@ -197,8 +229,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/products.js?v=3"></script>
-  <script src="js/cart.js?v=3"></script>
-  <script src="js/app.js?v=3"></script>
+  <script src="js/products.js?v=4"></script>
+  <script src="js/cart.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
 </body>
 </html>

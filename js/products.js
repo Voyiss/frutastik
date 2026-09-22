@@ -11,6 +11,16 @@ const CATEGORIES = [
   { id: 'bebidas', name: 'Bebidas', icon: '🥤' }
 ];
 
+const GOMITAS_MENU = [
+  { id: 'frutitas', name: 'Frutitas', emoji: '🍓' },
+  { id: 'panditas', name: 'Panditas', emoji: '🐻' },
+  { id: 'lombrices', name: 'Lombrices', emoji: '🐛' },
+  { id: 'aros-sandia', name: 'Aros de Sandía', emoji: '🍉' },
+  { id: 'aros-durazno', name: 'Aros de Durazno', emoji: '🍑' },
+  { id: 'aros-manzana', name: 'Aros de Manzana', emoji: '🍏' },
+  { id: 'manguitos', name: 'Manguitos Enchilados', emoji: '🥭' }
+];
+
 const PRODUCTS = [
   // FRUTA FORRADA CON PULPARINDO
   {
@@ -65,8 +75,10 @@ const PRODUCTS = [
     category: 'gomitas',
     categoryName: 'Gomitas',
     price: 30,
-    description: 'Elige 3 tipos de gomitas deliciosas al natural de nuestro menú.',
-    image: 'assets/products/gomi_vaso_natural.jpg'
+    description: 'Elige 3 tipos de gomitas deliciosas de nuestra barra de antojos al natural.',
+    image: 'assets/products/gomi_vaso_natural.jpg',
+    requiresGomitas: true,
+    maxGomitas: 3
   },
   {
     id: 'gomi-vaso-enchilado',
@@ -76,7 +88,9 @@ const PRODUCTS = [
     price: 35,
     description: 'Elige 3 tipos de gomitas y te las preparamos con chilito en polvo y chamoy.',
     image: 'assets/products/gomi_vaso_enchilado.jpg',
-    popular: true
+    popular: true,
+    requiresGomitas: true,
+    maxGomitas: 3
   },
   {
     id: 'gomi-vaso-ahogado',
@@ -86,7 +100,9 @@ const PRODUCTS = [
     price: 40,
     description: 'Elige 3 tipos de gomitas y las bañamos ahogadas en nuestro chamoy de la casa.',
     image: 'assets/products/gomi_vaso_ahogado.jpg',
-    badge: 'Especial'
+    badge: 'Especial',
+    requiresGomitas: true,
+    maxGomitas: 3
   },
 
   // MANZANAS PREPARADAS

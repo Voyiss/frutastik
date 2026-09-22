@@ -1094,3 +1094,250 @@ body {
 .site-footer a:hover {
   text-decoration: underline;
 }
+
+/* ==========================================================
+   Gomitas Customization Modal
+   ========================================================== */
+.gomitas-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+}
+
+@media (min-width: 600px) {
+  .gomitas-modal {
+    align-items: center;
+    padding: 20px;
+  }
+}
+
+.gomitas-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gomitas-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.gomitas-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  max-height: 85vh;
+  z-index: 2;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 600px) {
+  .gomitas-modal-content {
+    border-radius: var(--radius-lg);
+    transform: scale(0.95);
+  }
+}
+
+.gomitas-modal.open .gomitas-modal-content {
+  transform: translateY(0);
+}
+
+@media (min-width: 600px) {
+  .gomitas-modal.open .gomitas-modal-content {
+    transform: scale(1);
+  }
+}
+
+.gomitas-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background: #fff8f0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.gomitas-modal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.gomitas-modal-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+.gomitas-modal-body {
+  padding: 18px 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.gomitas-instruction {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #78350f;
+  margin-bottom: 12px;
+}
+
+.gomitas-options-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.gomita-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fdfaf6;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.gomita-checkbox-item input {
+  display: none;
+}
+
+.gomita-checkbox-item:hover {
+  background: #fff2e0;
+  border-color: var(--secondary);
+}
+
+.gomita-checkbox-item.selected {
+  background: #fff0eb;
+  border-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(217, 4, 41, 0.15);
+}
+
+.gomita-emoji {
+  font-size: 1.3rem;
+}
+
+.gomita-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  flex: 1;
+}
+
+.gomita-check-indicator {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: transparent;
+  transition: all 0.2s ease;
+}
+
+.gomita-checkbox-item.selected .gomita-check-indicator {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+.gomitas-counter-bar {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #fff8f0;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gomitas-counter-text {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #9a3412;
+}
+
+.gomitas-quick-btn {
+  background: none;
+  border: 1px dashed var(--secondary);
+  color: var(--secondary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gomitas-quick-btn:hover {
+  background: var(--secondary);
+  color: #ffffff;
+}
+
+.gomitas-modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border-color);
+  background: #ffffff;
+}
+
+.gomitas-confirm-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: #ccc;
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: not-allowed;
+  transition: all 0.2s ease;
+}
+
+.gomitas-confirm-btn.ready {
+  background: var(--primary);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(217, 4, 41, 0.3);
+}
+
+.gomitas-confirm-btn.ready:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.gomitas-hint-box {
+  cursor: pointer;
+  border: 1px dashed var(--secondary);
+  background: #fff9f0;
+}
+
+.gomitas-hint-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

@@ -81,16 +81,27 @@ document.addEventListener('DOMContentLoaded', () => {
     productsGrid.innerHTML = filtered.map(p => {
       const hasOptions = p.options && p.options.length > 0;
       
-      const optionsHtml = hasOptions ? `
-        <div class="product-options-wrapper">
-          <label for="opt-${p.id}" class="options-label">Personaliza tu orden:</label>
-          <select id="opt-${p.id}" class="product-option-select">
-            ${p.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-          </select>
-        </div>
-      ` : '';
+      let optionsHtml = '';
+      if (hasOptions) {
+        optionsHtml = `
+          <div class="product-options-wrapper">
+            <label for="opt-${p.id}" class="options-label">Personaliza tu orden:</label>
+            <select id="opt-${p.id}" class="product-option-select">
+              ${p.options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+            </select>
+          </div>
+        `;
+      } else if (p.requiresGomitas) {
+        optionsHtml = `
+          <div class="product-options-wrapper gomitas-hint-box" onclick="window.handleAddToCart('${p.id}')">
+            <span class="options-label">🍬 Elige tus 3 tipos de gomitas:</span>
+            <span class="gomitas-hint-sub">Frutitas, Panditas, Lombrices, Aros, Manguitos...</span>
+          </div>
+        `;
+      }
 
       const badgeHtml = p.badge ? `<span class="product-badge">${p.badge}</span>` : '';
+      const buttonLabel = p.requiresGomitas ? '+ Elegir Gomitas' : '+ Agregar';
 
       return `
         <article class="product-card" data-id="${p.id}">
@@ -109,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="currency">$</span>${p.price} <span class="mxn">MXN</span>
               </div>
               <button class="add-btn" onclick="window.handleAddToCart('${p.id}')">
-                <span>+ Agregar</span>
+                <span>${buttonLabel}</span>
               </button>
             </div>
           </div>
@@ -122,6 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.handleAddToCart = (productId) => {
     const product = PRODUCTS.find(p => p.id === productId);
     if (!product) return;
+
+    if (product.requiresGomitas) {
+      openGomitasModal(product);
+      return;
+    }
 
     let selectedOption = null;
     const optionSelect = document.getElementById(`opt-${productId}`);
@@ -292,6 +308,112 @@ document.addEventListener('DOMContentLoaded', () => {
   photoModal.addEventListener('click', (e) => {
     if (e.target === photoModal) closePhotoModal();
   });
+
+  // 6.1 MODAL DE PERSONALIZACIÓN DE GOMITAS
+  let currentGomitasProduct = null;
+  let selectedGomitas = [];
+
+  const gomitasModal = document.getElementById('gomitas-modal');
+  const gomitasModalBackdrop = document.querySelector('.gomitas-modal-backdrop');
+  const gomitasModalTitle = document.getElementById('gomitas-modal-title');
+  const gomitasModalSubtitle = document.getElementById('gomitas-modal-subtitle');
+  const gomitasModalClose = document.getElementById('gomitas-modal-close');
+  const gomitasOptionsList = document.getElementById('gomitas-options-list');
+  const gomitasSelectedCounter = document.getElementById('gomitas-selected-counter');
+  const gomitasQuickSelectBtn = document.getElementById('gomitas-quick-select-btn');
+  const gomitasConfirmAddBtn = document.getElementById('gomitas-confirm-add-btn');
+
+  function openGomitasModal(product) {
+    currentGomitasProduct = product;
+    selectedGomitas = [];
+    gomitasModalTitle.textContent = `Personaliza tu ${product.name}`;
+    gomitasModalSubtitle.textContent = `$${product.price} MXN • Elige hasta 3 tipos de gomitas`;
+    
+    renderGomitasCheckboxes();
+    updateGomitasCounter();
+
+    gomitasModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeGomitasModal() {
+    gomitasModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderGomitasCheckboxes() {
+    gomitasOptionsList.innerHTML = GOMITAS_MENU.map(g => {
+      const isChecked = selectedGomitas.includes(g.name);
+      return `
+        <label class="gomita-checkbox-item ${isChecked ? 'selected' : ''}" onclick="window.toggleGomitaSelection('${g.name}')">
+          <span class="gomita-emoji">${g.emoji}</span>
+          <span class="gomita-name">${g.name}</span>
+          <span class="gomita-check-indicator">${isChecked ? '✓' : ''}</span>
+        </label>
+      `;
+    }).join('');
+  }
+
+  window.toggleGomitaSelection = (gomitaName) => {
+    const index = selectedGomitas.indexOf(gomitaName);
+    if (index > -1) {
+      selectedGomitas.splice(index, 1);
+    } else {
+      if (selectedGomitas.length >= 3) {
+        showToast('¡Solo puedes elegir 3 tipos de gomitas!');
+        return;
+      }
+      selectedGomitas.push(gomitaName);
+    }
+    renderGomitasCheckboxes();
+    updateGomitasCounter();
+  };
+
+  function updateGomitasCounter() {
+    const count = selectedGomitas.length;
+    gomitasSelectedCounter.textContent = `${count} de 3 seleccionadas`;
+
+    if (count > 0) {
+      gomitasConfirmAddBtn.disabled = false;
+      gomitasConfirmAddBtn.textContent = `+ Agregar al Carrito (${count} gomitas)`;
+      gomitasConfirmAddBtn.classList.add('ready');
+    } else {
+      gomitasConfirmAddBtn.disabled = true;
+      gomitasConfirmAddBtn.textContent = 'Selecciona al menos 1 gomita';
+      gomitasConfirmAddBtn.classList.remove('ready');
+    }
+  }
+
+  if (gomitasQuickSelectBtn) {
+    gomitasQuickSelectBtn.addEventListener('click', () => {
+      selectedGomitas = ['Panditas', 'Lombrices', 'Manguitos Enchilados'];
+      renderGomitasCheckboxes();
+      updateGomitasCounter();
+      showToast('Seleccionado: Panditas, Lombrices y Manguitos');
+    });
+  }
+
+  if (gomitasConfirmAddBtn) {
+    gomitasConfirmAddBtn.addEventListener('click', () => {
+      if (!currentGomitasProduct || selectedGomitas.length === 0) return;
+
+      const optionString = selectedGomitas.join(', ');
+      window.cart.addItem(currentGomitasProduct, optionString, 1);
+      showToast(`¡${currentGomitasProduct.name} agregado con tus gomitas! 🍬`);
+
+      closeGomitasModal();
+
+      cartToggleBtn.classList.add('pulse');
+      if (floatingCartBar) floatingCartBar.classList.add('pulse');
+      setTimeout(() => {
+        cartToggleBtn.classList.remove('pulse');
+        if (floatingCartBar) floatingCartBar.classList.remove('pulse');
+      }, 500);
+    });
+  }
+
+  if (gomitasModalClose) gomitasModalClose.addEventListener('click', closeGomitasModal);
+  if (gomitasModalBackdrop) gomitasModalBackdrop.addEventListener('click', closeGomitasModal);
 
   // 7. BÚSQUEDA INSTANTÁNEA
   searchInput.addEventListener('input', (e) => {
