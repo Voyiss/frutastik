@@ -58,11 +58,11 @@ Luego ve a **Settings** -> **Pages** en tu repositorio de GitHub y activa la ram
 ---
 
 ## 📱 Número de WhatsApp Configurado
-- WhatsApp: **56 1120 9477** (formato internacional: `+52 56 1120 9477`)
+- WhatsApp: **56 1077 4092** (formato internacional: `+52 56 1077 4092`)
 - Si en el futuro tu amigo cambia de número telefónico, solo edita la línea en [`js/products.js`](file:///d:/usuario/duana/documentos/Proyectos%20especiales/Frutastika%20koala/js/products.js):
   ```javascript
   const STORE_CONFIG = {
-    phone: '525611209477', // Reemplaza aquí con el nuevo número con lada 52
+    phone: '525610774092', // Reemplaza aquí con el nuevo número con lada 52
     ...
   }
   ```

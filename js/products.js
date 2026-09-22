@@ -265,8 +265,8 @@ const PRODUCTS = [
 const STORE_CONFIG = {
   name: 'Frutastik',
   slogan: 'El paraíso del antojo',
-  phone: '525611209477',
-  displayPhone: '56 1120 9477',
+  phone: '525610774092',
+  displayPhone: '56 1077 4092',
   currency: '$',
   currencyCode: 'MXN'
 };
