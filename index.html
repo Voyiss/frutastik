@@ -142,16 +142,9 @@
         </div>
 
         <div class="form-group">
-          <label for="delivery-type">¿Cómo recibirás tu pedido?</label>
-          <select id="delivery-type" class="form-select">
-            <option value="domicilio">🛵 Entrega a Domicilio</option>
-            <option value="recoger">🏬 Pasar a Recoger</option>
-          </select>
-        </div>
-
-        <div class="form-group" id="address-group">
-          <label for="customer-address">Dirección o Referencias de Entrega *</label>
-          <input type="text" id="customer-address" class="form-input" placeholder="Calle, número, colonia o referencias" />
+          <label for="pickup-location">¿En dónde te entregamos? *</label>
+          <input type="text" id="pickup-location" class="form-input" placeholder="Ej. En el trabajo, en tu local, fiesta..." required />
+          <span class="field-hint">📍 Por favor, recuérdame en dónde entregarte (trabajo, fiesta, local, etc.).</span>
         </div>
 
         <div class="form-group">

@@ -30,9 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Campos de formulario de pedido
   const customerNameInput = document.getElementById('customer-name');
-  const deliveryTypeSelect = document.getElementById('delivery-type');
-  const addressGroup = document.getElementById('address-group');
-  const customerAddressInput = document.getElementById('customer-address');
+  const pickupLocationInput = document.getElementById('pickup-location');
   const orderNotesInput = document.getElementById('order-notes');
 
   // Modal de Fotos
@@ -224,18 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Toggle dirección si es a domicilio
-  if (deliveryTypeSelect) {
-    deliveryTypeSelect.addEventListener('change', () => {
-      if (deliveryTypeSelect.value === 'domicilio') {
-        addressGroup.classList.remove('hidden');
-        customerAddressInput.focus();
-      } else {
-        addressGroup.classList.add('hidden');
-      }
-    });
-  }
-
   // 5. ENVIAR PEDIDO A WHATSAPP
   checkoutBtn.addEventListener('click', () => {
     const items = window.cart.getItems();
@@ -251,13 +237,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const deliveryType = deliveryTypeSelect.value;
-    const isDelivery = deliveryType === 'domicilio';
-    const address = customerAddressInput.value.trim();
-
-    if (isDelivery && !address) {
-      alert('Por favor escribe tu dirección o ubicación de entrega.');
-      customerAddressInput.focus();
+    const pickupLocation = pickupLocationInput.value.trim();
+    if (!pickupLocation) {
+      alert('Por favor indícanos o recuérdanos en dónde entregarte.');
+      pickupLocationInput.focus();
       return;
     }
 
@@ -276,11 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     message += `\n💰 *TOTAL A PAGAR:* $${totals.total} MXN\n`;
     message += `───────────────────────\n`;
     message += `👤 *Cliente:* ${customerName}\n`;
-    message += `🛵 *Entrega:* ${isDelivery ? 'A domicilio' : 'Pasar a recoger'}\n`;
-
-    if (isDelivery && address) {
-      message += `📍 *Dirección:* ${address}\n`;
-    }
+    message += `📍 *Lugar de entrega:* ${pickupLocation}\n`;
 
     if (notes) {
       message += `📝 *Notas especiales:* ${notes}\n`;
