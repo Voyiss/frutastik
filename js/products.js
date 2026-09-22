@@ -21,6 +21,14 @@ const GOMITAS_MENU = [
   { id: 'manguitos', name: 'Manguitos Enchilados', emoji: '🥭' }
 ];
 
+const TOPPINGS_MENU = [
+  'Panditas',
+  'Skwinkles',
+  'Picafresa',
+  'Picafresa Sandía',
+  'Manguitos Enchilados'
+];
+
 const PRODUCTS = [
   // FRUTA FORRADA CON PULPARINDO
   {
@@ -40,11 +48,11 @@ const PRODUCTS = [
     category: 'fruta-forrada',
     categoryName: 'Fruta Forrada',
     price: 35,
-    description: 'Manzana cubierta con Pulparindo + 1 topping a elegir (Gomitas, Skwinkles, Cacahuates o Tamarindo bites).',
+    description: 'Manzana cubierta con Pulparindo + 1 topping a elegir (Panditas, Skwinkles, Picafresa, Picafresa Sandía o Manguitos Enchilados).',
     image: 'assets/products/manzana_forrada_topping.jpg',
     popular: true,
     badge: 'Popular',
-    options: ['Gomitas Surtidas', 'Skwinkles Clásicos', 'Cacahuates Japoneses', 'Tamarindo Bites']
+    options: TOPPINGS_MENU
   },
   {
     id: 'vaso-koala-ch',
@@ -122,10 +130,10 @@ const PRODUCTS = [
     category: 'manzanas-prep',
     categoryName: 'Manzanas Preparadas',
     price: 50,
-    description: 'Manzana forrada rebanada con 1 topping a elegir, gomitas, chilito y chamoy.',
+    description: 'Manzana forrada rebanada con 1 topping a elegir (Panditas, Skwinkles, Picafresa, Picafresa Sandía o Manguitos), gomitas, chilito y chamoy.',
     image: 'assets/products/gomi_manzana_topping.jpg',
     badge: 'Recomendado',
-    options: ['Gomitas Surtidas', 'Skwinkles Clásicos', 'Cacahuates Japoneses', 'Tamarindo Bites']
+    options: TOPPINGS_MENU
   },
   {
     id: 'manzana-botanera',
